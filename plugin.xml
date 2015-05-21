@@ -46,6 +46,7 @@
         </config-file>
 
         <source-file src="src/android/armeabi/libmsc.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/armeabi-v7a/libmsc.so" target-dir="libs/armeabi-v7a" />
         <source-file src="src/android/Msc.jar" target-dir="libs" />
         <source-file src="src/android/Echo.java" target-dir="src/com/lexiscn/balabala" />
     </platform>

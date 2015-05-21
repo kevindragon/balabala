@@ -63,8 +63,8 @@ public class Echo extends CordovaPlugin {
         // your init code here
         tst = Toast.makeText(webView.getContext(), "This is a toast.", Toast.LENGTH_SHORT);
 
-        toast("初始化");
-        println("初始化");
+        toast("initialize");
+        println("initialize");
 
         SpeechUtility.createUtility(this.webView.getContext(), SpeechConstant.APPID + "=" + iflytekAPPID);
     }
@@ -100,55 +100,29 @@ public class Echo extends CordovaPlugin {
 
         // 会话发生错误回调接口
         public void onError(SpeechError error) {
-            toast("发生错误: " + error.getErrorDescription());
-            println("发生错误: " + error.getErrorDescription());
+            toast("onError: " + error.getErrorDescription());
+            println("onError: " + error.getErrorDescription());
 
-            jsCallback.error("发生错误: " + error.getErrorDescription());
+            jsCallback.error("onError: " + error.getErrorDescription());
         }
 
         // 开始录音
         public void onBeginOfSpeech() {
-            toast("开始录音");
-            println("开始录音");
-
-//            JSONObject jsonObject = new JSONObject();
-//            try {
-//                jsonObject.put("action", "beginOfSpeech");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//            jsCallback.success(jsonObject);
+            toast("On begin of speech");
+            println("On begin of speech");
         }
 
         // 音量值0~30
+        @SuppressWarnings("deprecation")
         public void onVolumeChanged(int volume) {
-            println("改变音量");
-
-//            JSONObject jsonObject = new JSONObject();
-//            try {
-//                jsonObject.put("action", "volumeChanged");
-//                jsonObject.put("arg", volume);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//            jsCallback.success(jsonObject);
+            println("On volume changed: " + volume);
+            Echo.this.webView.sendJavascript("window.plugins.Balabala.volumeChanged("+volume+")");
         }
 
         // 结束录音
         public void onEndOfSpeech() {
-            toast("结束录音");
-            println("结束录音");
-
-//            JSONObject jsonObject = new JSONObject();
-//            try {
-//                jsonObject.put("action", "endOfSpeech");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//            jsCallback.success(jsonObject);
+            toast("On end of speech");
+            println("On end of speech");
         }
 
         // 扩展用接口

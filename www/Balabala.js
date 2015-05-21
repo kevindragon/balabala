@@ -5,17 +5,13 @@ Balabala.prototype.toast = function(arg) {
     cordova.exec(function(winParams){
         console.log(typeof winParams);
     }, function(err){
-        console.log(err)
+        console.log(err);
     }, 'Echo', 'toast', arg);
 };
 
 Balabala.prototype.understand = function() {
     var self = this;
     cordova.exec(function(winParams) {
-        //console.log("winParams: " + winParams);
-        //console.log("winParams: " + JSON.stringify(winParams));
-        //console.log("action: " + winParams["action"]);
-
         if (typeof winParams == 'object' && winParams["action"]) {
             var fn = self[winParams["action"]];
             if (typeof fn == 'function') {
@@ -30,14 +26,30 @@ Balabala.prototype.understand = function() {
     }, 'Echo', 'understand', "understand");
 };
 
+Balabala.prototype.error = function(err) {
+    console.log("--> Balabala onError called: " + err);
+};
+
+Balabala.prototype.beginOfSpeech = function() {
+    console.log("--> Balabala onBeginOfSpeech called.");
+};
+
+Balabala.prototype.volumeChanged = function(volume) {
+    console.log("--> Balabala onVolumeChanged called: " + volume);
+};
+
+Balabala.prototype.endOfSpeech = function() {
+    console.log("--> Balabala onEndOfSpeech called.");
+};
+
+Balabala.prototype.result = function(text) {
+    console.log("--> Balabala onResult called: " + text);
+};
+
 // 设置开始录音监听接口
 Balabala.prototype.onBeginOfSpeech = function(callback) {
     if (typeof callback == 'function') {
         this.beginOfSpeech = callback;
-    } else {
-        this.beginOfSpeech = function() {
-            console.log("Balabala onBeginOfSpeech called.")
-        };
     }
 };
 
@@ -45,10 +57,6 @@ Balabala.prototype.onBeginOfSpeech = function(callback) {
 Balabala.prototype.onVolumeChanged = function(callback) {
     if (typeof callback == 'function') {
         this.volumeChanged = callback;
-    } else {
-        this.beginOfSpeech = function(volume) {
-            console.log("Balabala onVolumeChanged called: " + volume);
-        };
     }
 };
 
@@ -56,10 +64,6 @@ Balabala.prototype.onVolumeChanged = function(callback) {
 Balabala.prototype.onEndOfSpeech = function(callback) {
     if (typeof callback == 'function') {
         this.endOfSpeech = callback;
-    } else {
-        this.endOfSpeech = function() {
-            console.log("Balabala onEndOfSpeech called.")
-        };
     }
 };
 
@@ -67,10 +71,6 @@ Balabala.prototype.onEndOfSpeech = function(callback) {
 Balabala.prototype.onResult = function(callback) {
     if (typeof callback == 'function') {
         this.result = callback;
-    } else {
-        this.result = function(text) {
-            console.log("Balabala onResult called: " + text);
-        };
     }
 };
 
@@ -78,10 +78,6 @@ Balabala.prototype.onResult = function(callback) {
 Balabala.prototype.onError = function(callback) {
     if (typeof callback == 'function') {
         this.error = callback;
-    } else {
-        this.error = function(err) {
-            console.log("Balabala onError called: " + err);
-        };
     }
 };
 
