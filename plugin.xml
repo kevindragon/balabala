@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.lexiscn.balabala"
+        version="1.0">
+
+    <name>Balabala</name>
+    <description>Balabala testing for cordova plugin</description>
+    <author>lexiscn.com</author>
+    <keywords>Balabala</keywords>
+    <license>Apache 2.0 License</license>
+
+    <engines>
+        <engine name="cordova" version=">=3.0"/>
+    </engines>
+
+    <js-module src="www/Balabala.js" name="Balabala">
+        <clobbers target="window.plugins.Balabala"/>
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Echo" >
+                <param name="android-package" value="com.lexiscn.balabala.Echo"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <!--连接网络权限，用于执行云端语音能力 -->
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <!--获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
+            <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+            <!--读取网络信息状态 -->
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <!--获取当前wifi状态 -->
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+            <!--允许程序改变网络连接状态 -->
+            <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+            <!--读取手机信息权限 -->
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+            <!--读取联系人权限，上传联系人需要用到此权限 -->
+            <uses-permission android:name="android.permission.READ_CONTACTS"/>
+            <!--摄相头权限，拍照需要用到 -->
+            <uses-permission android:name="android.permission.CAMERA" />
+        </config-file>
+
+        <source-file src="src/android/armeabi/libmsc.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/Msc.jar" target-dir="libs" />
+        <source-file src="src/android/Echo.java" target-dir="src/com/lexiscn/balabala" />
+    </platform>
+</plugin>
